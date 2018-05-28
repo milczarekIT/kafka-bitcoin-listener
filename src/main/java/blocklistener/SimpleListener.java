@@ -7,13 +7,19 @@ import org.bitcoinj.core.*;
 import org.bitcoinj.net.discovery.DnsDiscovery;
 import org.bitcoinj.params.MainNetParams;
 
+/**
+ * Experimental Bitcoin listener that sends events in the Bitcoin P2P network into Kafka.
+ */
 public class SimpleListener {
+    // bitcoinj config
     private NetworkParameters params;
     private Context context;
     private PeerGroup peerGroup;
 
+    // kafka config
     private KafkaBlockchainProducer producer;
 
+    // resuse a single jackson mapper for efficiency
     private ObjectMapper mapper;
 
 
@@ -22,6 +28,7 @@ public class SimpleListener {
 //        BriefLogFormatter.init();
         new SimpleListener();
     }
+
 
     public SimpleListener() throws Exception {
         setupNetwork();
