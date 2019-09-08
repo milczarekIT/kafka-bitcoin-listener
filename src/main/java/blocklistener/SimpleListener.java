@@ -2,14 +2,17 @@ package blocklistener;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.bitcoinj.core.*;
+import lombok.extern.slf4j.Slf4j;
+import org.bitcoinj.core.Context;
+import org.bitcoinj.core.NetworkParameters;
+import org.bitcoinj.core.PeerGroup;
 import org.bitcoinj.net.discovery.DnsDiscovery;
 import org.bitcoinj.params.MainNetParams;
 
 /**
  * Experimental Bitcoin listener that sends events in the Bitcoin P2P network into Kafka.
  */
+@Slf4j
 public class SimpleListener {
     // bitcoinj config
     private NetworkParameters params;
@@ -21,13 +24,6 @@ public class SimpleListener {
 
     // resuse a single jackson mapper for efficiency
     private ObjectMapper mapper;
-
-
-
-    public static void main(String[] args) throws Exception {
-//        BriefLogFormatter.init();
-        new SimpleListener();
-    }
 
 
     public SimpleListener() throws Exception {
@@ -44,6 +40,9 @@ public class SimpleListener {
 
     }
 
+    public static void main(String[] args) throws Exception {
+        new SimpleListener();
+    }
 
     private void setupNetwork() {
         // create network params
@@ -81,13 +80,17 @@ public class SimpleListener {
 
             // json producer
             BlockchainTransaction tx = new BlockchainTransaction(transaction);
+
+            log.info(">>> transaction: {}", transaction);
+            log.info(">>> tx: {}", tx);
             try {
                 producer.sendData(
                         "transactions",
                         "newTransaction",
-                        "txJSON: " + mapper.writeValueAsString(transaction));
+                        "txJSON: " + mapper.writeValueAsString(tx));
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
+                System.exit(-1);
             }
 
         });
