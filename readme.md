@@ -34,3 +34,12 @@ In order to check that our data is being sent into kafka, we set up a simple con
 
 2. Start a command line listener on transaction topic: 
 `bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic transactions --from-beginning`
+
+
+### Start applications
+
+1. Run application BitcoinTransactionListenerApplication to listen Bitcoin transactions from Bitcoin network and publish them to
+ `transactions` Kafka topic.
+
+2. Run application BitcoinTransactionKafkaConsumerApplication to consume bitcoin transaction from `transactions` Kafka topic and print
+ them on std out.
