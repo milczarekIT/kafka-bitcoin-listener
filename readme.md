@@ -17,7 +17,8 @@ https://kafka.apache.org/quickstart
 
 3. Start a kafka server: `bin/kafka-server-start.sh config/server.properties`
 
-4. Create a `transaction` topic: `bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic transactions`
+4. Create a `transactions` topic: `bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic
+ transactions`
 
 5. Check the the topic was created successfully: `bin/kafka-topics.sh --list --zookeeper localhost:2181`
 

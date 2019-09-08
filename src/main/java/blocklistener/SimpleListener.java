@@ -61,13 +61,13 @@ public class SimpleListener {
     private void setupListeners() {
         // callback for peer connection
         peerGroup.addConnectedEventListener((peer, peerCount) -> {
-            System.out.println("Peer connected: " + peer);
+            log.debug("Peer connected: {}", peer);
             producer.sendData("transactions", "newTransaction", "peer connected: " + peer.toString());
         });
 
         // callback for peer disconnection
         peerGroup.addDisconnectedEventListener((peer, peerCount) -> {
-            System.out.println("Peer disconnected: " + peer);
+            log.debug("Peer disconnected: {}", peer);
             producer.sendData("transactions", "newTransaction", "peer disconnected: " + peer.toString());
 
         });
@@ -89,8 +89,7 @@ public class SimpleListener {
                         "newTransaction",
                         "txJSON: " + mapper.writeValueAsString(tx));
             } catch (JsonProcessingException e) {
-                e.printStackTrace();
-                System.exit(-1);
+                log.error("JsonProcessingException during serialization: {}", tx, e);
             }
 
         });
