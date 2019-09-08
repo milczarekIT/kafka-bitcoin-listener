@@ -1,6 +1,6 @@
 # kafka-blockchain-listener
 
-An experimental Bitcoin listener that sends events in the Bitcoin P2P network into Kafka.
+An experimental Bitcoin transaction listener that sends transactions events from Bitcoin P2P network into Kafka topic.
 
 ## Usage
 
@@ -10,8 +10,8 @@ https://kafka.apache.org/quickstart
 
 ### Start an ad-hoc zoopkeeper instance and kafka server
 
-1. Navigate to the kafka diractory:
-`cd kafka_2.11-1.1.0`
+1. Navigate to the kafka directory:
+`cd kafka_2.12-2.3.0`
 
 2. Start zookeeper: `bin/zookeeper-server-start.sh config/zookeeper.properties`
 
@@ -27,8 +27,8 @@ https://kafka.apache.org/quickstart
 
 In order to check that our data is being sent into kafka, we set up a simple consumer to view messages sent to the topic.
 
-1. Navigate to the kafka diractory:
-`cd kafka_2.11-1.1.0`
+1. Navigate to the kafka directory:
+`cd kafka_2.12-2.3.0`
 
 
 2. Start a command line listener on transaction topic: 
