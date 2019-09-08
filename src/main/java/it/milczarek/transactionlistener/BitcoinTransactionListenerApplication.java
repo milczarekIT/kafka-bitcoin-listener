@@ -73,7 +73,7 @@ public class BitcoinTransactionListenerApplication extends Thread {
             final BitcoinTransaction bitcoinTransaction = new BitcoinTransaction(transaction);
 
             log.debug(">>> transaction: {}", transaction);
-            log.debug(">>> blockchainTransaction: {}", bitcoinTransaction);
+            log.debug(">>> bitcoinTransaction: {}", bitcoinTransaction);
             kafkaPublisher.publish(bitcoinTransaction);
         });
     }
