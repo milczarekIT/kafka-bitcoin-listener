@@ -1,4 +1,4 @@
-# kafka-blockchain-listener
+# kafka-bitcoin-transactions-listener
 
 An experimental Bitcoin transaction listener that sends transactions events from Bitcoin P2P network into Kafka topic.
 
