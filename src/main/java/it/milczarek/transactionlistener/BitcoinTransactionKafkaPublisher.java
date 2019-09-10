@@ -13,6 +13,12 @@ import java.net.UnknownHostException;
 import java.util.Properties;
 import java.util.Random;
 
+import static org.apache.kafka.clients.producer.ProducerConfig.ACKS_CONFIG;
+import static org.apache.kafka.clients.producer.ProducerConfig.BOOTSTRAP_SERVERS_CONFIG;
+import static org.apache.kafka.clients.producer.ProducerConfig.CLIENT_ID_CONFIG;
+import static org.apache.kafka.clients.producer.ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG;
+import static org.apache.kafka.clients.producer.ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG;
+
 @Slf4j
 public class BitcoinTransactionKafkaPublisher implements Closeable {
 
@@ -27,11 +33,11 @@ public class BitcoinTransactionKafkaPublisher implements Closeable {
 
     private Properties producerProperties() {
         final Properties props = new Properties();
-        props.put("client.id", clientId());
-        props.put("bootstrap.servers", "localhost:9092");
-        props.put("acks", "0");
-        props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
-        props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
+        props.put(CLIENT_ID_CONFIG, clientId());
+        props.put(BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ACKS_CONFIG, "0");
+        props.put(KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
+        props.put(VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
         return props;
     }
 
